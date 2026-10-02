@@ -13,6 +13,7 @@ const getEntry = (key) => {
   if (!entry) return null;
 
   if (isExpired(entry)) {
+    console.log(`[CACHE] EXPIRED: ${key}`);
     cache.delete(key);
     return null;
   }
@@ -38,6 +39,7 @@ const deleteEntry = (key) => {
  * Clear all cache entries.
  */
 const clearCache = () => {
+  console.log(`[CACHE] CLEARED: all ${cache.size} entries removed`);
   cache.clear();
 };
 

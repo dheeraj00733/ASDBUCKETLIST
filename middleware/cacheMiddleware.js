@@ -17,12 +17,15 @@ const cacheMiddleware = (req, res, next) => {
 
   // Cache HIT
   if (entry) {
+    const age = getCacheAge(entry);
+    console.log(`[CACHE] HIT: ${key} (age: ${age}s)`);
     res.set('X-Cache', 'HIT');
-    res.set('X-Cache-Age', String(getCacheAge(entry)));
+    res.set('X-Cache-Age', String(age));
     return res.json(entry.data);
   }
 
   // Cache MISS — intercept res.json to store the response
+  console.log(`[CACHE] MISS: ${key}`);
   res.set('X-Cache', 'MISS');
 
   const originalJson = res.json.bind(res);
