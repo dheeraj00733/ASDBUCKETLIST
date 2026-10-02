@@ -1,5 +1,6 @@
 const express = require('express');
 const productRoutes = require('./routes/productRoutes');
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -13,5 +14,8 @@ app.use('/products', productRoutes);
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
+
+// Global error handler (must be last)
+app.use(errorHandler);
 
 module.exports = app;
