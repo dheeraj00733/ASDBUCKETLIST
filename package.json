@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/dheeraj00733/ASDBUCKETLIST/issues"
   },
-  "homepage": "https://github.com/dheeraj00733/ASDBUCKETLIST#readme"
+  "homepage": "https://github.com/dheeraj00733/ASDBUCKETLIST#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
 }
