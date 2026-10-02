@@ -133,7 +133,6 @@ Any subset of the fields above (at least one required).
 |----------------|----------------------------------------------------|
 | `X-Cache: HIT` | Response served from cache                         |
 | `X-Cache: MISS`| Response fetched from database (cache was empty/expired) |
-| `X-Cache-Age`  | Age of the cached entry in seconds (only on HITs)  |
 
 ### Cache Invalidation
 

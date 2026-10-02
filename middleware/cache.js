@@ -13,7 +13,6 @@ const getEntry = (key) => {
   if (!entry) return null;
 
   if (isExpired(entry)) {
-    console.log(`[CACHE] EXPIRED: ${key}`);
     cache.delete(key);
     return null;
   }
@@ -39,7 +38,6 @@ const deleteEntry = (key) => {
  * Clear all cache entries.
  */
 const clearCache = () => {
-  console.log(`[CACHE] CLEARED: all ${cache.size} entries removed`);
   cache.clear();
 };
 
@@ -52,13 +50,7 @@ const isExpired = (entry) => {
   return Date.now() - entry.createdAt > TTL_MS;
 };
 
-/**
- * Get the age of a cache entry in seconds.
- * Used to set the X-Cache-Age response header on cache HITs.
- */
-const getCacheAge = (entry) => {
-  return Math.floor((Date.now() - entry.createdAt) / 1000);
-};
+
 
 module.exports = {
   TTL_MS,
@@ -67,5 +59,4 @@ module.exports = {
   deleteEntry,
   clearCache,
   isExpired,
-  getCacheAge,
 };
