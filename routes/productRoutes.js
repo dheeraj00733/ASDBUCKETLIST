@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
 const cacheMiddleware = require('../middleware/cacheMiddleware');
+const invalidateCache = require('../middleware/invalidateCache');
 
 // GET    /products
 router.get('/', cacheMiddleware, productController.getAllProducts);
@@ -10,15 +11,15 @@ router.get('/', cacheMiddleware, productController.getAllProducts);
 router.get('/:id', cacheMiddleware, productController.getProductById);
 
 // POST   /products
-router.post('/', productController.createProduct);
+router.post('/', invalidateCache, productController.createProduct);
 
 // PUT    /products/:id
-router.put('/:id', productController.updateProduct);
+router.put('/:id', invalidateCache, productController.updateProduct);
 
 // PATCH  /products/:id
-router.patch('/:id', productController.patchProduct);
+router.patch('/:id', invalidateCache, productController.patchProduct);
 
 // DELETE /products/:id
-router.delete('/:id', productController.deleteProduct);
+router.delete('/:id', invalidateCache, productController.deleteProduct);
 
 module.exports = router;
