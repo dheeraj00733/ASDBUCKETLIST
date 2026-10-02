@@ -42,10 +42,20 @@ const clearCache = () => {
 };
 
 /**
- * Check if a cache entry has exceeded the TTL.
+ * Check if a cache entry has exceeded the 1-minute TTL.
+ * Compares Date.now() - entry.createdAt against TTL_MS (60000 ms).
+ * Expired entries should be deleted and treated as a cache MISS.
  */
 const isExpired = (entry) => {
   return Date.now() - entry.createdAt > TTL_MS;
+};
+
+/**
+ * Get the age of a cache entry in seconds.
+ * Used to set the X-Cache-Age response header on cache HITs.
+ */
+const getCacheAge = (entry) => {
+  return Math.floor((Date.now() - entry.createdAt) / 1000);
 };
 
 module.exports = {
@@ -55,4 +65,5 @@ module.exports = {
   deleteEntry,
   clearCache,
   isExpired,
+  getCacheAge,
 };
