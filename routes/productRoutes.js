@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
+const cacheMiddleware = require('../middleware/cacheMiddleware');
 
 // GET    /products
-router.get('/', productController.getAllProducts);
+router.get('/', cacheMiddleware, productController.getAllProducts);
 
 // GET    /products/:id
-router.get('/:id', productController.getProductById);
+router.get('/:id', cacheMiddleware, productController.getProductById);
 
 // POST   /products
 router.post('/', productController.createProduct);
